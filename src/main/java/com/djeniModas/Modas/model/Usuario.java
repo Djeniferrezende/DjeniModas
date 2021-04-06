@@ -1,5 +1,7 @@
 package com.djeniModas.Modas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public class Usuario implements Serializable{
     private String telefone;
     private String senha;
 
+    //para nao ficar chamando varias vezes e causar um lupin 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
