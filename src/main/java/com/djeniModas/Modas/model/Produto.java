@@ -1,5 +1,7 @@
 package com.djeniModas.Modas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,7 +17,9 @@ public class Produto {
     private Double preco;
     private String imgUrl;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn (name = "Produto_id"), inverseJoinColumns = @JoinColumn(name = "Catogoria_id"))
     private Set<Categoria> categoriaSet = new HashSet<>();
 
     public Produto(){

@@ -1,5 +1,7 @@
 package com.djeniModas.Modas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,9 +14,11 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    //categoriaset é o nome da colecao
 
-    @Transient
-    private Set<Produto> categoriaSet = new HashSet<>();
+    //@JsonIgnore
+    @ManyToMany(mappedBy ="categoriaSet")
+    private Set<Produto> produtoSet = new HashSet<>();
 
     public Categoria(){
 
@@ -42,7 +46,7 @@ public class Categoria {
     }
 
     public Set<Produto> getCategoriaSet() {
-        return categoriaSet;
+        return produtoSet;
     }
 
     @Override
