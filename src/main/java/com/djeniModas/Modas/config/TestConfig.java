@@ -1,15 +1,9 @@
 package com.djeniModas.Modas.config;
 
 
-import com.djeniModas.Modas.model.Categoria;
-import com.djeniModas.Modas.model.Pedido;
-import com.djeniModas.Modas.model.Produto;
-import com.djeniModas.Modas.model.Usuario;
+import com.djeniModas.Modas.model.*;
 import com.djeniModas.Modas.model.emum.PedidoStatus;
-import com.djeniModas.Modas.repository.CategoriaRepository;
-import com.djeniModas.Modas.repository.PedidoRepository;
-import com.djeniModas.Modas.repository.ProdutoRepository;
-import com.djeniModas.Modas.repository.UsuarioRepository;
+import com.djeniModas.Modas.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     ProdutoRepository produtoRepository;
+
+    @Autowired
+    PedidoItemRepository pedidoItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -74,5 +71,13 @@ public class TestConfig implements CommandLineRunner {
 
         Usuariorepository.saveAll(Arrays.asList(u1,u2));
        pedidoRepository.saveAll(Arrays.asList(o1,o2,o3));
+
+        PedidoItem oi1 = new PedidoItem(o1, p1, 2, p1.getPreco());
+        PedidoItem oi2 = new PedidoItem(o1, p3, 1, p3.getPreco());
+        PedidoItem oi3 = new  PedidoItem(o2, p3, 2, p3.getPreco());
+        PedidoItem oi4 = new  PedidoItem(o3, p5, 2, p5.getPreco());
+
+      pedidoItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
     }
 }
