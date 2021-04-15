@@ -29,6 +29,10 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "id.pedido")
     private Set<PedidoItem> items = new HashSet<>();
 
+    //mapeando para o mesmo id pedido e pagamento
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private Pagamento pagamento;
+
 
 
     public Pedido(){
@@ -78,6 +82,22 @@ public class Pedido implements Serializable {
     }
     public Set<PedidoItem> getItems(){
         return items;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public double getTotal(){
+        double soma = 0.0;
+        for(PedidoItem pedido : items){
+            soma += pedido.getSubTotal();
+        }
+        return soma;
     }
 
     @Override

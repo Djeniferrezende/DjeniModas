@@ -37,6 +37,7 @@ public class PedidoItemPk implements Serializable {
         this.produto = produto;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
