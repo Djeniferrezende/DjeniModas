@@ -2,6 +2,7 @@ package com.djeniModas.Modas.service;
 
 import com.djeniModas.Modas.model.Usuario;
 import com.djeniModas.Modas.repository.UsuarioRepository;
+import com.djeniModas.Modas.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +25,7 @@ public class UsuarioService {
 
     public Usuario finById(Long id){
         Optional<Usuario> user = repository.findById(id);
-       return user.get();
+       return user.orElseThrow(()-> new ResourceNotFoundException(id));
 
     }
 
